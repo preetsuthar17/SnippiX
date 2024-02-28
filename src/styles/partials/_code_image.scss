@@ -1,0 +1,18 @@
+.code-image-div {
+  margin: 2rem auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pre {
+    border-radius: 10px;
+  }
+
+  code {
+    font-family: var(--code-font-family) !important;
+    font-size: 16px !important;
+  }
+  button {
+    margin: 1rem 0;
+  }
+}

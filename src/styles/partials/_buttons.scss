@@ -1,0 +1,14 @@
+.primary-button {
+  background-color: var(--primary-color);
+  padding: 10px;
+  width: fit-content;
+  font-family: var(--body-font-family);
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s ease all;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}

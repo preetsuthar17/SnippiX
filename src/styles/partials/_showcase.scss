@@ -1,0 +1,21 @@
+.showcase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  h1 {
+    font-size: 5rem;
+    letter-spacing: -3px;
+    @media screen and (max-width: 445px) {
+      font-size: 4rem;
+    }
+  }
+  p {
+    width: 20rem;
+    font-size: 14px;
+    @media screen and (max-width: 445px) {
+      width: 17rem;
+      font-size: 13px;
+    }
+  }
+}

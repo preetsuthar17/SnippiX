@@ -1,14 +1,9 @@
-import { useState } from 'react';
-import CodeEditor from '@/compoents/CodeEditor';
-import CodeImage from '@/compoents/CodeImage';
+import { Showcase } from "@/components/Showcase";
 
 export default function Home() {
-  const [code, setCode] = useState('');
-
   return (
     <div>
-      <CodeEditor onCodeSubmit={(inputCode) => setCode(inputCode)} />
-      {code && <CodeImage code={code} />}
+      <Showcase />
     </div>
   );
 }

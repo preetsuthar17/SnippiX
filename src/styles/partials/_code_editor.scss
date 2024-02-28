@@ -1,0 +1,22 @@
+.code-editor-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 2rem auto;
+  width: 90%;
+  justify-content: center;
+}
+
+.code-editor-textarea {
+  width: 100%;
+  min-height: 200px;
+  height: 200px;
+  font-family: var(--code-font-family);
+  background-color: var(--secondary-background-color);
+  color: var(--white-text);
+  border: 1px solid rgba(255, 255, 255, 0.082);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 15px;
+  margin: 1rem 0;
+}

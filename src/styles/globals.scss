@@ -19,14 +19,42 @@
 
 html,
 body {
-  background-color: var(--background-color);
   overflow-x: hidden;
 }
 
 body {
   color: var(--white-text-color);
   font-family: var(--body-font-family);
-  margin-inline: 1rem;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  width: 90%;
+  margin-inline: auto;
+  background-image: linear-gradient(
+    45deg,
+    hsl(231deg 47% 6%) 40%,
+    hsl(225deg 38% 8%) 74%,
+    hsl(220deg 39% 9%) 86%,
+    hsl(216deg 44% 11%) 93%,
+    hsl(212deg 50% 12%) 97%,
+    hsl(216deg 44% 11%) 99%,
+    hsl(220deg 39% 9%) 100%,
+    hsl(225deg 38% 8%) 100%,
+    hsl(231deg 47% 6%) 100%
+  );
+}
+
+body::-webkit-scrollbar {
+  width: 0.4em;
+  background: var(--background-color);
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+  background-size: 400% 400%;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #39393986;
+  border-radius: 12px;
 }
 
 a {

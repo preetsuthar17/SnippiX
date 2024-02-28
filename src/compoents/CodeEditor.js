@@ -1,4 +1,3 @@
-// components/CodeEditor.js
 import { useState } from 'react';
 
 export default function CodeEditor({ onCodeSubmit }) {
@@ -11,7 +10,7 @@ export default function CodeEditor({ onCodeSubmit }) {
         onChange={(e) => setCode(e.target.value)}
         placeholder="Type your code here..."
       />
-      <button onClick={() => onCodeSubmit(code)}>Generate Image</button>
+      <button onClick={() => onCodeSubmit(code)}>Snippixify code</button>
     </div>
   );
 }

@@ -1,6 +1,44 @@
 import { useState, useRef } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { a11yDark, atomDark, base16AteliersulphurpoolLight, cb, coldarkCold, coldarkDark, coy, dracula, dark, duotoneDark, duotoneEarth, duotoneForest, duotoneLight, duotoneSea, duotoneSpace, funky, ghcolors, hopscotch, materialDark, materialLight, materialOceanic, nightOwl, nord, okaidia, oneDark, oneLight, pojoaque, prism, shadesOfPurple, solarizedlight, synthwave84, tomorrow, twilight, vs, vsDark, vscDarkPlus, xonokai } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import {
+  a11yDark,
+  atomDark,
+  base16AteliersulphurpoolLight,
+  cb,
+  coldarkCold,
+  coldarkDark,
+  coy,
+  dracula,
+  dark,
+  duotoneDark,
+  duotoneEarth,
+  duotoneForest,
+  duotoneLight,
+  duotoneSea,
+  duotoneSpace,
+  funky,
+  ghcolors,
+  hopscotch,
+  materialDark,
+  materialLight,
+  materialOceanic,
+  nightOwl,
+  nord,
+  okaidia,
+  oneDark,
+  oneLight,
+  pojoaque,
+  prism,
+  shadesOfPurple,
+  solarizedlight,
+  synthwave84,
+  tomorrow,
+  twilight,
+  vs,
+  vsDark,
+  vscDarkPlus,
+  xonokai,
+} from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { toPng } from "html-to-image";
 
 const themes = {
@@ -40,12 +78,208 @@ const themes = {
   twilight,
   vs,
   vsDark,
-  xonokai
+  xonokai,
 };
+
+const supportedLanguages = [
+  "1c",
+  "abnf",
+  "accesslog",
+  "actionscript",
+  "ada",
+  "angelscript",
+  "apache",
+  "applescript",
+  "arcade",
+  "arduino",
+  "armasm",
+  "asciidoc",
+  "aspectj",
+  "autohotkey",
+  "autoit",
+  "avrasm",
+  "awk",
+  "axapta",
+  "bash",
+  "basic",
+  "bnf",
+  "brainfuck",
+  "c-like",
+  "c",
+  "cal",
+  "capnproto",
+  "ceylon",
+  "clean",
+  "clojure-repl",
+  "clojure",
+  "cmake",
+  "coffeescript",
+  "coq",
+  "cos",
+  "cpp",
+  "crmsh",
+  "crystal",
+  "csharp",
+  "csp",
+  "css",
+  "d",
+  "dart",
+  "delphi",
+  "diff",
+  "django",
+  "dns",
+  "dockerfile",
+  "dos",
+  "dsconfig",
+  "dts",
+  "dust",
+  "ebnf",
+  "elixir",
+  "elm",
+  "erb",
+  "erlang-repl",
+  "erlang",
+  "excel",
+  "fix",
+  "flix",
+  "fortran",
+  "fsharp",
+  "gams",
+  "gauss",
+  "gcode",
+  "gherkin",
+  "glsl",
+  "gml",
+  "go",
+  "golo",
+  "gradle",
+  "groovy",
+  "haml",
+  "handlebars",
+  "haskell",
+  "haxe",
+  "hsp",
+  "htmlbars",
+  "http",
+  "hy",
+  "inform7",
+  "ini",
+  "irpf90",
+  "isbl",
+  "java",
+  "javascript",
+  "jboss-cli",
+  "json",
+  "julia-repl",
+  "julia",
+  "kotlin",
+  "lasso",
+  "latex",
+  "ldif",
+  "leaf",
+  "less",
+  "lisp",
+  "livecodeserver",
+  "livescript",
+  "llvm",
+  "lsl",
+  "lua",
+  "makefile",
+  "markdown",
+  "mathematica",
+  "matlab",
+  "maxima",
+  "mel",
+  "mercury",
+  "mipsasm",
+  "mizar",
+  "mojolicious",
+  "monkey",
+  "moonscript",
+  "n1ql",
+  "nginx",
+  "nim",
+  "nix",
+  "node-repl",
+  "nsis",
+  "objectivec",
+  "ocaml",
+  "openscad",
+  "oxygene",
+  "parser3",
+  "perl",
+  "pf",
+  "pgsql",
+  "php-template",
+  "php",
+  "plaintext",
+  "pony",
+  "powershell",
+  "processing",
+  "profile",
+  "prolog",
+  "properties",
+  "protobuf",
+  "puppet",
+  "purebasic",
+  "python-repl",
+  "python",
+  "q",
+  "qml",
+  "r",
+  "reasonml",
+  "rib",
+  "roboconf",
+  "routeros",
+  "rsl",
+  "ruby",
+  "ruleslanguage",
+  "rust",
+  "sas",
+  "scala",
+  "scheme",
+  "scilab",
+  "scss",
+  "shell",
+  "smali",
+  "smalltalk",
+  "sml",
+  "sqf",
+  "sql",
+  "sql_more",
+  "stan",
+  "stata",
+  "step21",
+  "stylus",
+  "subunit",
+  "swift",
+  "taggerscript",
+  "tap",
+  "tcl",
+  "thrift",
+  "tp",
+  "twig",
+  "typescript",
+  "vala",
+  "vbnet",
+  "vbscript-html",
+  "vbscript",
+  "verilog",
+  "vhdl",
+  "vim",
+  "x86asm",
+  "xl",
+  "xml",
+  "xquery",
+  "yaml",
+  "zephir",
+];
 
 export default function CodeImage({ code }) {
   const [selectedTheme, setSelectedTheme] = useState(vscDarkPlus);
   const [fontSize, setFontSize] = useState(16);
+  const [selectedLanguage, setSelectedLanguage] = useState("javascript");
+
   const ref = useRef();
 
   const handleThemeChange = (event) => {
@@ -53,14 +287,22 @@ export default function CodeImage({ code }) {
     setSelectedTheme(themes[themeName]);
   };
 
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
+
   const handleFontSizeChange = (event) => {
     const newFontSize = parseInt(event.target.value);
     setFontSize(newFontSize);
-    document.documentElement.style.setProperty("--font-size", `${newFontSize}px`);
+    document.documentElement.style.setProperty(
+      "--font-size",
+      `${newFontSize}px`
+    );
   };
   const downloadImage = async () => {
-    if (!ref.current) { return; }
-
+    if (!ref.current) {
+      return;
+    }
 
     const originalWidth = ref.current.style.width;
     const originalHeight = ref.current.style.height;
@@ -68,7 +310,7 @@ export default function CodeImage({ code }) {
 
     ref.current.style.width = "max-content";
     ref.current.style.height = "max-content";
-    ref.current.style.padding = '10px'
+    ref.current.style.padding = "10px";
 
     setTimeout(() => {
       toPng(ref.current, { cacheBust: true })
@@ -90,24 +332,47 @@ export default function CodeImage({ code }) {
   return (
     <div className="code-image-div">
       <div className="code-image-config-options">
-        <div className="theme-select-div">
+        <div className="theme-select-div ">
           <select onChange={handleThemeChange} className="theme-selector">
             {Object.keys(themes).map((theme, index) => (
-              <option key={index} value={theme}>{theme}</option>
+              <option key={index} value={theme}>
+                {theme}
+              </option>
             ))}
           </select>
-        </div>
-        <div className="PB-range-slider-div"> <small>Font Size</small> <input type="range" id="myRange" min="13" max="40" value={fontSize} onChange={handleFontSizeChange} className="font-size-slider PB-range-slider" />
+          <select
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            className="language-selector theme-selector"
+          >
+            {supportedLanguages.map((language, index) => (
+              <option key={index} value={language}>
+                {language}
+              </option>
+            ))}
+          </select>
+          <div className="PB-range-slider-div">
+            {" "}
+            <small>Font Size</small>{" "}
+            <input
+              type="range"
+              id="myRange"
+              min="13"
+              max="40"
+              value={fontSize}
+              onChange={handleFontSizeChange}
+              className="font-size-slider PB-range-slider"
+            />
+          </div>
         </div>
       </div>
 
       <div ref={ref}>
         <SyntaxHighlighter
           className="code-block"
-          language="javascript"
+          language={selectedLanguage}
           style={selectedTheme}
           showLineNumbers={true}
-
         >
           {code}
         </SyntaxHighlighter>

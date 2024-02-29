@@ -1,7 +1,7 @@
 .showcase {
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin: 2rem 0;
   text-align: center;
   h1 {
     font-size: 5rem;
@@ -18,4 +18,8 @@
       font-size: 13px;
     }
   }
+}
+
+.showcase-code-input-section {
+  margin-top: -23rem;
 }

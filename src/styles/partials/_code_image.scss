@@ -35,12 +35,15 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    width: 100%;
-    input{
+    input {
       flex-grow: 1;
     }
-    .theme-select-div{
-      .theme-selector{
+    .theme-select-div {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      .theme-selector {
+        flex-grow: 1;
         padding: 1rem;
         height: 4rem;
         font-family: var(--body-font-family);
@@ -48,17 +51,16 @@
         color: var(--white-text-color);
         border-radius: 6px;
         border: 1px solid #c6cace1a;
-        box-shadow: 0px 1px 2px 0px #1F1E241F;
-        &:focus{
+        box-shadow: 0px 1px 2px 0px #1f1e241f;
+        &:focus {
           outline: none;
           border: 1px solid #c6cace1a;
         }
-        option{
+        option {
           background-color: var(--background-color);
           border-radius: 6px;
           border: 1px solid #c6cace1a;
-          box-shadow: 0px 1px 2px 0px #1F1E241F;
-          
+          box-shadow: 0px 1px 2px 0px #1f1e241f;
         }
       }
     }
@@ -69,8 +71,8 @@
       background: var(--white-text-color);
       outline: none;
       opacity: 0.7;
-      -webkit-transition: .2s;
-      transition: opacity .2s;
+      -webkit-transition: 0.2s;
+      transition: opacity 0.2s;
     }
 
     .PB-range-slider::-webkit-slider-thumb {
@@ -98,6 +100,8 @@
 
     .PB-range-slider-div {
       display: flex;
+      flex-grow: 1;
+
       align-items: center;
       width: fit-content;
       height: 4rem;
@@ -105,7 +109,7 @@
       padding: 10px;
       border-radius: 6px;
       border: 1px solid #c6cace1a;
-      box-shadow: 0px 1px 2px 0px #1F1E241F;
+      box-shadow: 0px 1px 2px 0px #1f1e241f;
     }
 
     .PB-range-slidervalue {
@@ -115,6 +119,6 @@
 }
 
 .code-block,
-.code-block>code {
+.code-block > code {
   font-size: var(--font-size) !important;
 }

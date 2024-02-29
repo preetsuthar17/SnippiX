@@ -18,5 +18,8 @@
     "react-dom": "^18",
     "react-syntax-highlighter": "^15.5.0",
     "sass": "^1.71.1"
+  },
+  "devDependencies": {
+    "@types/react-syntax-highlighter": "^15.5.11"
   }
 }

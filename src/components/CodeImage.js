@@ -14,9 +14,11 @@ export default function CodeImage({ code }) {
 
     const originalWidth = ref.current.style.width;
     const originalHeight = ref.current.style.height;
+    const originalPadding = ref.current.style.padding;
 
     ref.current.style.width = "max-content";
     ref.current.style.height = "max-content";
+    ref.current.style.padding = '10px'
 
     setTimeout(() => {
       toPng(ref.current, { cacheBust: true })
@@ -28,6 +30,7 @@ export default function CodeImage({ code }) {
 
           ref.current.style.width = originalWidth;
           ref.current.style.height = originalHeight;
+          ref.current.style.padding = originalPadding;
         })
         .catch((err) => {
           console.error("oops, something went wrong!", err);
@@ -46,14 +49,16 @@ export default function CodeImage({ code }) {
 
   return (
     <div className="code-image-div">
-      <input
-        type="range"
-        min="13"
-        max="40"
-        value={fontSize}
-        onChange={handleFontSizeChange}
-        className="font-size-slider"
-      />
+      <div class="PB-range-slider-div">
+        <small>Font Size</small>
+        <input type="range" id="myRange"
+          min="13"
+          max="40"
+          value={fontSize}
+          onChange={handleFontSizeChange}
+          className="font-size-slider PB-range-slider" />
+
+      </div>
       <div ref={ref}>
         <SyntaxHighlighter
           className="code-block"

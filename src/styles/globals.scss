@@ -4,6 +4,7 @@
   --white-text-color: #e3e6f5;
   --black-text-color: #000000;
   --background-color: #080a16;
+  --second-background-color: #080a16;
   --primary-color: #8f9cd6;
   --secondary-color: #622d7a;
   --accent-color: #b84ebe;
@@ -31,18 +32,16 @@ body {
   margin-inline: auto;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: linear-gradient(
-    45deg,
-    hsl(231deg 47% 6%) 40%,
-    hsl(225deg 38% 8%) 74%,
-    hsl(220deg 39% 9%) 86%,
-    hsl(216deg 44% 11%) 93%,
-    hsl(212deg 50% 12%) 97%,
-    hsl(216deg 44% 11%) 99%,
-    hsl(220deg 39% 9%) 100%,
-    hsl(225deg 38% 8%) 100%,
-    hsl(231deg 47% 6%) 100%
-  );
+  background-image: linear-gradient(45deg,
+      hsl(231deg 47% 6%) 40%,
+      hsl(225deg 38% 8%) 74%,
+      hsl(220deg 39% 9%) 86%,
+      hsl(216deg 44% 11%) 93%,
+      hsl(212deg 50% 12%) 97%,
+      hsl(216deg 44% 11%) 99%,
+      hsl(220deg 39% 9%) 100%,
+      hsl(225deg 38% 8%) 100%,
+      hsl(231deg 47% 6%) 100%);
 }
 
 body::-webkit-scrollbar {

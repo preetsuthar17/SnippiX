@@ -21,13 +21,16 @@ export const Navbar = () => {
         <div className="navbar-links">
           <ul>
             <li>
-              <Link href="https://github.com/preetsuthar17" target="_blank">
-                Github
+              <Link href="https://preetsuthar.me" target="_blank">
+                developer
               </Link>
             </li>
             <li>
-              <Link href="https://preetsuthar.me" target="_blank">
-                Owner
+              <Link
+                href="https://buy.stripe.com/fZeaGJeU23Cn9u8288"
+                target="_blank"
+              >
+                donate
               </Link>
             </li>
           </ul>

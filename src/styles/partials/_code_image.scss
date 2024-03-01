@@ -36,14 +36,13 @@
       border-right: 2px solid rgba(255, 255, 255, 0.08) !important;
       border-bottom: none !important;
       display: flex !important;
-      justify-content: center !important;
 
       > code {
         width: 100% !important;
         text-align: center !important;
-      }
-      @media screen and (max-width: 520px) {
-        justify-content: right !important;
+        @media screen and (max-width: 520px) {
+          text-align: right !important;
+        }
       }
     }
     .interaction-buttons {

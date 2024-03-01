@@ -404,16 +404,18 @@ export default function CodeImage({ code }) {
     if (!ref.current) {
       return;
     }
-    setIsProcessing(true)
     const originalWidth = ref.current.style.width;
     const originalHeight = ref.current.style.height;
     const originalPadding = ref.current.style.padding;
 
+    setIsProcessing(true)
     ref.current.style.width = "max-content";
     ref.current.style.height = "max-content";
     ref.current.style.padding = "10px 10px";
 
     setTimeout(() => {
+      setIsProcessing(true)
+
       toPng(ref.current, { cacheBust: true })
         .then((dataUrl) => {
           const link = document.createElement("a");
@@ -424,12 +426,13 @@ export default function CodeImage({ code }) {
           ref.current.style.width = originalWidth;
           ref.current.style.height = originalHeight;
           ref.current.style.padding = originalPadding;
-          setIsProcessing(false)
         })
         .catch((err) => {
           console.error("oops, something went wrong!", err);
         });
+      setIsProcessing(false)
     }, 0);
+    setIsProcessing(false)
   };
 
   const onColorChange = (event) => {

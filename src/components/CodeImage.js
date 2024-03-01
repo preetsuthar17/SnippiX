@@ -418,11 +418,13 @@ export default function CodeImage({ code, fileName }) {
     const originalWidth = ref.current.style.width;
     const originalHeight = ref.current.style.height;
     const originalPadding = ref.current.style.padding;
+    const originalOverflow = ref.current.style.overflow;
 
     setIsProcessing(true);
     ref.current.style.width = "max-content";
     ref.current.style.height = "max-content";
     ref.current.style.padding = "10px 10px";
+    ref.current.style.overflow = "hidden";
 
     setTimeout(() => {
       setIsProcessing(true);
@@ -437,6 +439,7 @@ export default function CodeImage({ code, fileName }) {
           ref.current.style.width = originalWidth;
           ref.current.style.height = originalHeight;
           ref.current.style.padding = originalPadding;
+          ref.current.style.overflow = originalOverflow;
         })
         .catch((err) => {
           console.error("oops, something went wrong!", err);

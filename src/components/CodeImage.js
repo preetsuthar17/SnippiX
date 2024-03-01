@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { ChromePicker, SketchPicker } from 'react-color';
 import {
   a11yDark,
   atomDark,
@@ -414,13 +413,11 @@ export default function CodeImage({ code }) {
     }, 0);
   };
 
-  const onColorChange = (updatedColor) => {
-    setColor(updatedColor.hex);
-    console.log(updatedColor.hex);
-
+  const onColorChange = (event) => {
+    setColor(event.target.value);
     document.documentElement.style.setProperty(
       "--margin-color",
-      `${updatedColor.hex}`
+      `${event.target.value}`
     );
   };
   return (
@@ -471,22 +468,9 @@ export default function CodeImage({ code }) {
               className="font-size-slider PB-range-slider"
             />
           </div>
-          <div className="transparency-checkbox">
-
-            <label htmlFor="transparency">  <input
-              type="checkbox"
-              id="transparency"
-              checked={transparent}
-              onChange={() => setTransparent(!transparent)}
-            /> background</label>
-          </div>
-
-          {transparent && (
             <div className="color-picker">
-              <ChromePicker color={color} onChange={onColorChange} />
+              <input type="color" value={color} onChange={onColorChange} />
             </div>
-          )
-          }
         </div>
       </div>
 

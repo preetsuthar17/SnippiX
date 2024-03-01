@@ -125,7 +125,7 @@
     }
   }
 
-  .transparency-checkbox {
+  .color-picker {
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #c6cace1a;
@@ -134,18 +134,24 @@
     display: flex;
     align-items: center;
     width: min-content;
-    label {
-      display: flex;
-      gap: 10px;
-      line-height: 20px;
-    }
-  }
 
-  .color-picker {
-    right: 10%;
-    position: absolute;
   }
-
+  input[type="color"] {
+    -webkit-appearance: 1px solid #ffffff0a;
+    border-radius: 2px;
+    border: 1px solid #ffffff0a;
+    border-radius: 2px;
+    cursor:pointer;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    cursor:pointer;
+}
+input[type="color"]::-webkit-color-swatch {
+    border: 1px solid #ffffff0a;
+    border-radius: 2px;
+    cursor:pointer;
+}
   .code-image-background {
     border-radius: 14px;
     background-color: var(--margin-color) !important;

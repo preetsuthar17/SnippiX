@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { ChromePicker, SketchPicker } from 'react-color';
 import {
   a11yDark,
   atomDark,
@@ -278,9 +279,11 @@ const supportedLanguages = [
 export default function CodeImage({ code }) {
   const [selectedTheme, setSelectedTheme] = useState(vscDarkPlus);
   const [fontSize, setFontSize] = useState(16);
+  const [margin, setMargin] = useState(0);
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
-
+  const [color, setColor] = useState('#fff');
   const ref = useRef();
+  const [transparent, setTransparent] = useState(false);
 
   useEffect(() => {
     const autoDetectLanguage = () => {
@@ -362,6 +365,15 @@ export default function CodeImage({ code }) {
     setSelectedLanguage(event.target.value);
   };
 
+  const handleMarginChange = (event) => {
+    const newMargin = parseInt(event.target.value);
+    setMargin(newMargin);
+    document.documentElement.style.setProperty(
+      "--margin-image",
+      `${newMargin}px`
+    );
+  };
+
   const handleFontSizeChange = (event) => {
     const newFontSize = parseInt(event.target.value);
     setFontSize(newFontSize);
@@ -370,6 +382,7 @@ export default function CodeImage({ code }) {
       `${newFontSize}px`
     );
   };
+
   const downloadImage = async () => {
     if (!ref.current) {
       return;
@@ -381,7 +394,7 @@ export default function CodeImage({ code }) {
 
     ref.current.style.width = "max-content";
     ref.current.style.height = "max-content";
-    ref.current.style.padding = "10px";
+    ref.current.style.padding = "10px 10px";
 
     setTimeout(() => {
       toPng(ref.current, { cacheBust: true })
@@ -399,6 +412,16 @@ export default function CodeImage({ code }) {
           console.error("oops, something went wrong!", err);
         });
     }, 0);
+  };
+
+  const onColorChange = (updatedColor) => {
+    setColor(updatedColor.hex);
+    console.log(updatedColor.hex);
+
+    document.documentElement.style.setProperty(
+      "--margin-color",
+      `${updatedColor.hex}`
+    );
   };
   return (
     <div className="code-image-div">
@@ -435,10 +458,39 @@ export default function CodeImage({ code }) {
               className="font-size-slider PB-range-slider"
             />
           </div>
+          <div className="PB-range-slider-div">
+            {" "}
+            <small>Gap</small>{" "}
+            <input
+              type="range"
+              id="myRange"
+              min="0"
+              max="100"
+              value={margin}
+              onChange={handleMarginChange}
+              className="font-size-slider PB-range-slider"
+            />
+          </div>
+          <div className="transparency-checkbox">
+
+            <label htmlFor="transparency">  <input
+              type="checkbox"
+              id="transparency"
+              checked={transparent}
+              onChange={() => setTransparent(!transparent)}
+            /> background</label>
+          </div>
+
+          {transparent && (
+            <div className="color-picker">
+              <ChromePicker color={color} onChange={onColorChange} />
+            </div>
+          )
+          }
         </div>
       </div>
 
-      <div ref={ref}>
+      <div className="code-image-background" ref={ref}>
         <SyntaxHighlighter
           className="code-block"
           language={selectedLanguage}

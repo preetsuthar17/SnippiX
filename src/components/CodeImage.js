@@ -284,6 +284,8 @@ export default function CodeImage({ code }) {
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [color, setColor] = useState('#fff');
   const [settingsDropdown, setSettingsDropdown] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false)
+
   const ref = useRef();
 
   useEffect(() => {
@@ -402,7 +404,7 @@ export default function CodeImage({ code }) {
     if (!ref.current) {
       return;
     }
-
+    setIsProcessing(true)
     const originalWidth = ref.current.style.width;
     const originalHeight = ref.current.style.height;
     const originalPadding = ref.current.style.padding;
@@ -422,6 +424,7 @@ export default function CodeImage({ code }) {
           ref.current.style.width = originalWidth;
           ref.current.style.height = originalHeight;
           ref.current.style.padding = originalPadding;
+          setIsProcessing(false)
         })
         .catch((err) => {
           console.error("oops, something went wrong!", err);
@@ -519,8 +522,8 @@ export default function CodeImage({ code }) {
           )}
         </div>
       </div>
-      <button onClick={downloadImage} className="primary-button">
-        Download Image
+      <button disabled={isProcessing} onClick={downloadImage} className="primary-button">
+        {isProcessing ? "Downloading..." : "Download Image"}
       </button>
     </div>
   );

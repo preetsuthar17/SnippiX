@@ -278,16 +278,27 @@ const supportedLanguages = [
 export default function CodeImage({ code, fileName }) {
   const [selectedTheme, setSelectedTheme] = useState(vscDarkPlus);
   const [fontSize, setFontSize] = useState(16);
-  const [margin, setMargin] = useState(0);
+  const [margin, setMargin] = useState(20);
   const [boxShadow, setBoxShadow] = useState("");
+  const [hasBoxShadow, setHasBoxShadow] = useState(true);
   const [watermark, setWatermark] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
-  const [color, setColor] = useState("#fff");
+  const [color, setColor] = useState("#8785FF");
   const [settingsDropdown, setSettingsDropdown] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [lineCount, setLineCount] = useState(false);
 
   const ref = useRef();
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--margin-color", color);
+    document.documentElement.style.setProperty("--margin-image", `${margin}px`);
+    document.documentElement.style.setProperty(
+      "--box-shadow",
+      `0 20px 68px rgba(0, 0, 0, 0.55)`
+    );
+    setHasBoxShadow(true);
+  }, []);
 
   useEffect(() => {
     const autoDetectLanguage = () => {
@@ -391,7 +402,8 @@ export default function CodeImage({ code, fileName }) {
 
   const handleBoxShadowToggle = () => {
     setBoxShadow((prevState) => !prevState);
-    const newBoxShadow = boxShadow ? "" : "0 20px 68px rgba(0, 0, 0, 0.55)";
+    setHasBoxShadow(!hasBoxShadow);
+    const newBoxShadow = boxShadow ? "0 20px 68px rgba(0, 0, 0, 0.55)" : "";
     document.documentElement.style.setProperty("--box-shadow", newBoxShadow);
   };
   const handleWatermarkToggle = () => {
@@ -527,8 +539,12 @@ export default function CodeImage({ code, fileName }) {
             {settingsDropdown && (
               <div className="settings-dropdown-menu-content">
                 <label>
-                  <input type="checkbox" onClick={handleBoxShadowToggle} /> box
-                  shadow
+                  <input
+                    type="checkbox"
+                    onClick={handleBoxShadowToggle}
+                    checked={hasBoxShadow}
+                  />
+                  box shadow
                 </label>
                 <label>
                   <input

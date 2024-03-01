@@ -276,7 +276,7 @@ const supportedLanguages = [
 ];
 
 export default function CodeImage({ code, fileName }) {
-  const [selectedTheme, setSelectedTheme] = useState(vscDarkPlus);
+  const [selectedTheme, setSelectedTheme] = useState(oneDark);
   const [fontSize, setFontSize] = useState(16);
   const [margin, setMargin] = useState(0);
   const [boxShadow, setBoxShadow] = useState("");
@@ -490,7 +490,7 @@ export default function CodeImage({ code, fileName }) {
           </div>
           <div className="PB-range-slider-div">
             {" "}
-            <small>Gap</small>{" "}
+            <small>Margin</small>{" "}
             <input
               type="range"
               id="myRange"

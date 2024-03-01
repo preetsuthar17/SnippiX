@@ -285,6 +285,7 @@ export default function CodeImage({ code, fileName }) {
   const [color, setColor] = useState("#fff");
   const [settingsDropdown, setSettingsDropdown] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [lineCount, setLineCount] = useState(false);
 
   const ref = useRef();
 
@@ -395,6 +396,10 @@ export default function CodeImage({ code, fileName }) {
   };
   const handleWatermarkToggle = () => {
     setWatermark(!watermark);
+  };
+
+  const handleLineCountToggle = () => {
+    setLineCount(!lineCount);
   };
 
   const handleFontSizeChange = (event) => {
@@ -530,6 +535,14 @@ export default function CodeImage({ code, fileName }) {
                   />{" "}
                   watermark
                 </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={lineCount}
+                    onClick={handleLineCountToggle}
+                  />{" "}
+                  line count
+                </label>
               </div>
             )}
           </div>
@@ -557,7 +570,7 @@ export default function CodeImage({ code, fileName }) {
             className="code-block"
             language={selectedLanguage}
             style={selectedTheme}
-            showLineNumbers={true}
+            showLineNumbers={lineCount}
           >
             {code}
           </SyntaxHighlighter>

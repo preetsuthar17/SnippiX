@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
   a11yDark,
@@ -281,6 +281,77 @@ export default function CodeImage({ code }) {
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
 
   const ref = useRef();
+
+  useEffect(() => {
+    const autoDetectLanguage = () => {
+
+      const languageIdentifiers = {
+        "javascript": ["import", "function", "const", "let", "var", "console", "console.log"],
+        "python": ["import", "def", "class", "print"],
+        "java": ["import", "public", "class", "System.out.println"],
+        "ruby": ["require", "def", "class", "puts"],
+        "csharp": ["using", "class", "public", "Console.WriteLine"],
+        "php": ["<?php", "function", "class", "echo"],
+        "go": ["package", "func", "var", "println"],
+        "swift": ["import", "class", "func", "print"],
+        "c": ["#include", "int", "void", "printf"],
+        "c++": ["#include", "int", "void", "cout"],
+        "haskell": ["module", "import", "data", "type", "where"],
+        "scala": ["package", "import", "class", "def", "println"],
+        "kotlin": ["package", "import", "fun", "class", "println"],
+        "rust": ["use", "fn", "struct", "impl"],
+        "html": ["<!DOCTYPE html>", "<html", "<head", "<body", "<h1", "<p"],
+        "css": ["body", "margin", "padding", "font-size", "color"],
+        "json": ["{", "}", "\"", ":"],
+        "perl": ["use", "package", "sub", "print"],
+        "shell": ["#!/bin/bash", "echo", "if", "then"],
+        "matlab": ["function", "end", "plot", "for"],
+        "r": ["library", "source", "sink", "transform"],
+        "lua": ["function", "local", "if", "then"],
+        "makefile": ["all:", "CC=", "CFLAGS=", "LDLIBS="],
+        "markdown": ["#", "##", "###", "**", "*"],
+        "objective-c": ["#import", "@interface", "@implementation", "NSObject"],
+        "racket": ["#lang", "define", "if", "cond"],
+        "sql": ["SELECT", "FROM", "WHERE", "GROUP BY", "HAVING"],
+        "scss": ["@import", "$", "@mixin", "@media"],
+        "typescript": ["import", "interface", "class", "let", "const"],
+        "vbnet": ["Imports", "Public", "Class", "Console.WriteLine"],
+        "xml": ["<?xml", "<root", "<child", "/>", ">"],
+        "bash": ["#!/bin/bash", "echo", "if", "then"],
+        "clojure": ["ns", "defn", "def", "if", "cond"],
+        "coffeescript": ["import", "class", "if", "then"],
+        "d": ["import", "module", "public", "void", "writeln"],
+        "elixir": ["defmodule", "def", "defp", "IO.puts"],
+        "erlang": ["-module", "-export", "io:format"],
+        "fsharp": ["module", "let", "type", "printfn"],
+        "groovy": ["import", "class", "def", "println"],
+        "haxe": ["import", "class", "function", "trace"],
+        "ini": ["[section]", "key=value"],
+        "jade": ["doctype", "html", "head", "body", "h1", "p"],
+        "less": ["@import", "@media", "body", "color"],
+        "nim": ["import", "proc", "echo", "if", "then"],
+        "ocaml": ["module", "type", "let", "print_endline"],
+        "powershell": ["Import-Module", "function", "if", "then"],
+        "python": ["from", "import", "def", "class", "print"],
+        "r": ["library", "source", "sink", "transform"],
+        "coffeescript": ["class", "if", "then", "console.log"],
+        "dart": ["import", "class", "void", "print"],
+      };
+
+
+      for (const [language, identifiers] of Object.entries(languageIdentifiers)) {
+
+        if (identifiers.some(identifier => code.includes(identifier))) {
+          setSelectedLanguage(language);
+          return;
+        }
+      }
+
+      setSelectedLanguage("plaintext");
+    };
+
+    autoDetectLanguage();
+  }, [code]);
 
   const handleThemeChange = (event) => {
     const themeName = event.target.value;

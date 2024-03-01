@@ -276,7 +276,7 @@ const supportedLanguages = [
 ];
 
 export default function CodeImage({ code, fileName }) {
-  const [selectedTheme, setSelectedTheme] = useState(oneDark);
+  const [selectedTheme, setSelectedTheme] = useState(vscDarkPlus);
   const [fontSize, setFontSize] = useState(16);
   const [margin, setMargin] = useState(0);
   const [boxShadow, setBoxShadow] = useState("");

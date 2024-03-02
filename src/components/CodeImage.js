@@ -41,6 +41,7 @@ import {
   xonokai,
 } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { toPng } from "html-to-image";
+import * as clipboard from "clipboard-polyfill";
 
 export default function CodeImage({ code, fileName }) {
   const [selectedTheme, setSelectedTheme] = useState(vscDarkPlus);
@@ -57,7 +58,7 @@ export default function CodeImage({ code, fileName }) {
   const [settingsDropdown, setSettingsDropdown] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [lineCount, setLineCount] = useState(false);
-
+  const [isCopied, setIsCopied] = useState(false);
   const ref = useRef();
   const colorPickerRef = useRef();
   const settingsMenuRef = useRef();
@@ -472,6 +473,7 @@ export default function CodeImage({ code, fileName }) {
   };
 
   const downloadImage = async () => {
+    setIsProcessing(true);
     if (!ref.current) {
       return;
     }
@@ -480,15 +482,12 @@ export default function CodeImage({ code, fileName }) {
     const originalPadding = ref.current.style.padding;
     const originalOverflow = ref.current.style.overflow;
 
-    setIsProcessing(true);
     ref.current.style.width = "max-content";
     ref.current.style.height = "max-content";
     ref.current.style.padding = "10px 10px";
     ref.current.style.overflow = "hidden";
 
     setTimeout(() => {
-      setIsProcessing(true);
-
       toPng(ref.current, { cacheBust: true })
         .then((dataUrl) => {
           const link = document.createElement("a");
@@ -504,9 +503,49 @@ export default function CodeImage({ code, fileName }) {
         .catch((err) => {
           console.error("oops, something went wrong!", err);
         });
-      setIsProcessing(false);
     }, 0);
     setIsProcessing(false);
+  };
+
+  const copyImage = async () => {
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 5000);
+
+    if (!ref.current) {
+      return;
+    }
+
+    const originalWidth = ref.current.style.width;
+    const originalHeight = ref.current.style.height;
+    const originalPadding = ref.current.style.padding;
+    const originalOverflow = ref.current.style.overflow;
+
+    ref.current.style.width = "max-content";
+    ref.current.style.height = "max-content";
+    ref.current.style.padding = "10px 10px";
+    ref.current.style.overflow = "hidden";
+
+    setTimeout(() => {
+      toPng(ref.current, { cacheBust: true })
+        .then((dataUrl) => {
+          fetch(dataUrl)
+            .then((res) => res.blob())
+            .then((blob) => {
+              const item = new clipboard.ClipboardItem({ "image/png": blob });
+              clipboard.write([item]);
+            });
+
+          ref.current.style.width = originalWidth;
+          ref.current.style.height = originalHeight;
+          ref.current.style.padding = originalPadding;
+          ref.current.style.overflow = originalOverflow;
+        })
+        .catch((err) => {
+          console.error("oops, something went wrong!", err);
+        });
+    }, 0);
   };
 
   return (
@@ -673,17 +712,48 @@ export default function CodeImage({ code, fileName }) {
             {code}
           </SyntaxHighlighter>
           <div className="watermark-content">
-            {watermark && <p>Made with SnippiX</p>}
+            {watermark && <p>snippix.netlify.app</p>}
           </div>
         </div>
       </div>
-      <button
-        disabled={isProcessing}
-        onClick={downloadImage}
-        className="primary-button"
-      >
-        {isProcessing ? "Downloading..." : "Download Image"}
-      </button>
+      <div className="code-image-buttons">
+        <button
+          disabled={isProcessing}
+          onClick={downloadImage}
+          className="primary-button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M12 15.575q-.2 0-.375-.062T11.3 15.3l-3.6-3.6q-.3-.3-.288-.7t.288-.7q.3-.3.713-.312t.712.287L11 12.15V5q0-.425.288-.712T12 4q.425 0 .713.288T13 5v7.15l1.875-1.875q.3-.3.713-.288t.712.313q.275.3.288.7t-.288.7l-3.6 3.6q-.15.15-.325.213t-.375.062M6 20q-.825 0-1.412-.587T4 18v-2q0-.425.288-.712T5 15q.425 0 .713.288T6 16v2h12v-2q0-.425.288-.712T19 15q.425 0 .713.288T20 16v2q0 .825-.587 1.413T18 20z"
+            />
+          </svg>
+          {isProcessing ? "Downloading..." : "Download Image"}
+        </button>
+        <button
+          disabled={isProcessing}
+          onClick={copyImage}
+          className="primary-button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="23"
+            height="23"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M9 18q-.825 0-1.412-.587T7 16V4q0-.825.588-1.412T9 2h9q.825 0 1.413.588T20 4v12q0 .825-.587 1.413T18 18zm0-2h9V4H9zm-4 6q-.825 0-1.412-.587T3 20V6h2v14h11v2zm4-6V4z"
+            />
+          </svg>
+          {isCopied ? "Copied!" : "Copy Image"}
+        </button>
+      </div>
     </div>
   );
 }

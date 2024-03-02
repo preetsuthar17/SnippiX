@@ -67,7 +67,6 @@
 
   .code-image-main-div {
     margin: var(--margin-image) !important;
-
     display: flex;
     flex-direction: column;
   }
@@ -330,4 +329,12 @@
 
 .code-block {
   box-shadow: var(--box-shadow) !important;
+}
+
+.code-image-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }

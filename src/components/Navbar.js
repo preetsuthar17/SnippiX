@@ -30,7 +30,7 @@ export const Navbar = () => {
                 href="https://buy.stripe.com/fZeaGJeU23Cn9u8288"
                 target="_blank"
               >
-                donate
+                support
               </Link>
             </li>
           </ul>

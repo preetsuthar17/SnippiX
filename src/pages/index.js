@@ -7,7 +7,6 @@ export default function Home() {
     <Layout>
       <Head>
         <title>
-          {" "}
           SnippiX - Easily convert your code snippets in beautiful images.
         </title>
         <meta name="robots" content="all" />

@@ -569,7 +569,7 @@ export default function CodeImage({ code, fileName }) {
       </div>
       <div className="code-image-background" ref={ref}>
         <div className="code-image-main-div">
-          {fileName && (
+          {fileName ? (
             <div className="file-name-div">
               <SyntaxHighlighter
                 className="file-name"
@@ -577,6 +577,21 @@ export default function CodeImage({ code, fileName }) {
                 style={selectedTheme}
               >
                 {fileName}
+              </SyntaxHighlighter>
+              <div className="interaction-buttons">
+                <div className="red"></div>
+                <div className="yellow"></div>
+                <div className="green"></div>
+              </div>
+            </div>
+          ) : (
+            <div className="file-name-div">
+              <SyntaxHighlighter
+                className="file-name"
+                language="plaintext"
+                style={selectedTheme}
+              >
+                &nbsp;
               </SyntaxHighlighter>
               <div className="interaction-buttons">
                 <div className="red"></div>

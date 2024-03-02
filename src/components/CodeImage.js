@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import ReactGPicker from "react-gcolor-picker";
 import {
   a11yDark,
   atomDark,
@@ -41,240 +42,6 @@ import {
 } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { toPng } from "html-to-image";
 
-const themes = {
-  vscDarkPlus,
-  a11yDark,
-  atomDark,
-  base16AteliersulphurpoolLight,
-  cb,
-  coldarkCold,
-  coldarkDark,
-  coy,
-  dracula,
-  dark,
-  duotoneDark,
-  duotoneEarth,
-  duotoneForest,
-  duotoneLight,
-  duotoneSea,
-  duotoneSpace,
-  funky,
-  ghcolors,
-  hopscotch,
-  materialDark,
-  materialLight,
-  materialOceanic,
-  nightOwl,
-  nord,
-  okaidia,
-  oneDark,
-  oneLight,
-  pojoaque,
-  prism,
-  shadesOfPurple,
-  solarizedlight,
-  synthwave84,
-  tomorrow,
-  twilight,
-  vs,
-  vsDark,
-  xonokai,
-};
-
-const supportedLanguages = [
-  "1c",
-  "abnf",
-  "accesslog",
-  "actionscript",
-  "ada",
-  "angelscript",
-  "apache",
-  "applescript",
-  "arcade",
-  "arduino",
-  "armasm",
-  "asciidoc",
-  "aspectj",
-  "autohotkey",
-  "autoit",
-  "avrasm",
-  "awk",
-  "axapta",
-  "bash",
-  "basic",
-  "bnf",
-  "brainfuck",
-  "c-like",
-  "c",
-  "cal",
-  "capnproto",
-  "ceylon",
-  "clean",
-  "clojure-repl",
-  "clojure",
-  "cmake",
-  "coffeescript",
-  "coq",
-  "cos",
-  "cpp",
-  "crmsh",
-  "crystal",
-  "csharp",
-  "csp",
-  "css",
-  "d",
-  "dart",
-  "delphi",
-  "diff",
-  "django",
-  "dns",
-  "dockerfile",
-  "dos",
-  "dsconfig",
-  "dts",
-  "dust",
-  "ebnf",
-  "elixir",
-  "elm",
-  "erb",
-  "erlang-repl",
-  "erlang",
-  "excel",
-  "fix",
-  "flix",
-  "fortran",
-  "fsharp",
-  "gams",
-  "gauss",
-  "gcode",
-  "gherkin",
-  "glsl",
-  "gml",
-  "go",
-  "golo",
-  "gradle",
-  "groovy",
-  "haml",
-  "handlebars",
-  "haskell",
-  "haxe",
-  "hsp",
-  "htmlbars",
-  "http",
-  "hy",
-  "inform7",
-  "ini",
-  "irpf90",
-  "isbl",
-  "java",
-  "javascript",
-  "jboss-cli",
-  "json",
-  "julia-repl",
-  "julia",
-  "kotlin",
-  "lasso",
-  "latex",
-  "ldif",
-  "leaf",
-  "less",
-  "lisp",
-  "livecodeserver",
-  "livescript",
-  "llvm",
-  "lsl",
-  "lua",
-  "makefile",
-  "markdown",
-  "mathematica",
-  "matlab",
-  "maxima",
-  "mel",
-  "mercury",
-  "mipsasm",
-  "mizar",
-  "mojolicious",
-  "monkey",
-  "moonscript",
-  "n1ql",
-  "nginx",
-  "nim",
-  "nix",
-  "node-repl",
-  "nsis",
-  "objectivec",
-  "ocaml",
-  "openscad",
-  "oxygene",
-  "parser3",
-  "perl",
-  "pf",
-  "pgsql",
-  "php-template",
-  "php",
-  "plaintext",
-  "pony",
-  "powershell",
-  "processing",
-  "profile",
-  "prolog",
-  "properties",
-  "protobuf",
-  "puppet",
-  "purebasic",
-  "python-repl",
-  "python",
-  "q",
-  "qml",
-  "r",
-  "reasonml",
-  "rib",
-  "roboconf",
-  "routeros",
-  "rsl",
-  "ruby",
-  "ruleslanguage",
-  "rust",
-  "sas",
-  "scala",
-  "scheme",
-  "scilab",
-  "scss",
-  "shell",
-  "smali",
-  "smalltalk",
-  "sml",
-  "sqf",
-  "sql",
-  "sql_more",
-  "stan",
-  "stata",
-  "step21",
-  "stylus",
-  "subunit",
-  "swift",
-  "taggerscript",
-  "tap",
-  "tcl",
-  "thrift",
-  "tp",
-  "twig",
-  "typescript",
-  "vala",
-  "vbnet",
-  "vbscript-html",
-  "vbscript",
-  "verilog",
-  "vhdl",
-  "vim",
-  "x86asm",
-  "xl",
-  "xml",
-  "xquery",
-  "yaml",
-  "zephir",
-];
-
 export default function CodeImage({ code, fileName }) {
   const [selectedTheme, setSelectedTheme] = useState(vscDarkPlus);
   const [fontSize, setFontSize] = useState(16);
@@ -283,21 +50,292 @@ export default function CodeImage({ code, fileName }) {
   const [hasBoxShadow, setHasBoxShadow] = useState(true);
   const [watermark, setWatermark] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
-  const [color, setColor] = useState("#8785FF");
+  const [gradientColor, setGradientColor] = useState(
+    "linear-gradient(90deg, rgb(120, 115, 245) 0.00%,rgb(236, 119, 171) 100.00%)"
+  );
+  const [showColorPicker, setShowColorPicker] = useState(false);
   const [settingsDropdown, setSettingsDropdown] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [lineCount, setLineCount] = useState(false);
 
   const ref = useRef();
+  const colorPickerRef = useRef();
+  const settingsMenuRef = useRef();
+
+  const themes = {
+    vscDarkPlus,
+    a11yDark,
+    atomDark,
+    base16AteliersulphurpoolLight,
+    cb,
+    coldarkCold,
+    coldarkDark,
+    coy,
+    dracula,
+    dark,
+    duotoneDark,
+    duotoneEarth,
+    duotoneForest,
+    duotoneLight,
+    duotoneSea,
+    duotoneSpace,
+    funky,
+    ghcolors,
+    hopscotch,
+    materialDark,
+    materialLight,
+    materialOceanic,
+    nightOwl,
+    nord,
+    okaidia,
+    oneDark,
+    oneLight,
+    pojoaque,
+    prism,
+    shadesOfPurple,
+    solarizedlight,
+    synthwave84,
+    tomorrow,
+    twilight,
+    vs,
+    vsDark,
+    xonokai,
+  };
+
+  const supportedLanguages = [
+    "1c",
+    "abnf",
+    "accesslog",
+    "actionscript",
+    "ada",
+    "angelscript",
+    "apache",
+    "applescript",
+    "arcade",
+    "arduino",
+    "armasm",
+    "asciidoc",
+    "aspectj",
+    "autohotkey",
+    "autoit",
+    "avrasm",
+    "awk",
+    "axapta",
+    "bash",
+    "basic",
+    "bnf",
+    "brainfuck",
+    "c-like",
+    "c",
+    "cal",
+    "capnproto",
+    "ceylon",
+    "clean",
+    "clojure-repl",
+    "clojure",
+    "cmake",
+    "coffeescript",
+    "coq",
+    "cos",
+    "cpp",
+    "crmsh",
+    "crystal",
+    "csharp",
+    "csp",
+    "css",
+    "d",
+    "dart",
+    "delphi",
+    "diff",
+    "django",
+    "dns",
+    "dockerfile",
+    "dos",
+    "dsconfig",
+    "dts",
+    "dust",
+    "ebnf",
+    "elixir",
+    "elm",
+    "erb",
+    "erlang-repl",
+    "erlang",
+    "excel",
+    "fix",
+    "flix",
+    "fortran",
+    "fsharp",
+    "gams",
+    "gauss",
+    "gcode",
+    "gherkin",
+    "glsl",
+    "gml",
+    "go",
+    "golo",
+    "gradle",
+    "groovy",
+    "haml",
+    "handlebars",
+    "haskell",
+    "haxe",
+    "hsp",
+    "htmlbars",
+    "http",
+    "hy",
+    "inform7",
+    "ini",
+    "irpf90",
+    "isbl",
+    "java",
+    "javascript",
+    "jboss-cli",
+    "json",
+    "julia-repl",
+    "julia",
+    "kotlin",
+    "lasso",
+    "latex",
+    "ldif",
+    "leaf",
+    "less",
+    "lisp",
+    "livecodeserver",
+    "livescript",
+    "llvm",
+    "lsl",
+    "lua",
+    "makefile",
+    "markdown",
+    "mathematica",
+    "matlab",
+    "maxima",
+    "mel",
+    "mercury",
+    "mipsasm",
+    "mizar",
+    "mojolicious",
+    "monkey",
+    "moonscript",
+    "n1ql",
+    "nginx",
+    "nim",
+    "nix",
+    "node-repl",
+    "nsis",
+    "objectivec",
+    "ocaml",
+    "openscad",
+    "oxygene",
+    "parser3",
+    "perl",
+    "pf",
+    "pgsql",
+    "php-template",
+    "php",
+    "plaintext",
+    "pony",
+    "powershell",
+    "processing",
+    "profile",
+    "prolog",
+    "properties",
+    "protobuf",
+    "puppet",
+    "purebasic",
+    "python-repl",
+    "python",
+    "q",
+    "qml",
+    "r",
+    "reasonml",
+    "rib",
+    "roboconf",
+    "routeros",
+    "rsl",
+    "ruby",
+    "ruleslanguage",
+    "rust",
+    "sas",
+    "scala",
+    "scheme",
+    "scilab",
+    "scss",
+    "shell",
+    "smali",
+    "smalltalk",
+    "sml",
+    "sqf",
+    "sql",
+    "sql_more",
+    "stan",
+    "stata",
+    "step21",
+    "stylus",
+    "subunit",
+    "swift",
+    "taggerscript",
+    "tap",
+    "tcl",
+    "thrift",
+    "tp",
+    "twig",
+    "typescript",
+    "vala",
+    "vbnet",
+    "vbscript-html",
+    "vbscript",
+    "verilog",
+    "vhdl",
+    "vim",
+    "x86asm",
+    "xl",
+    "xml",
+    "xquery",
+    "yaml",
+    "zephir",
+  ];
 
   useEffect(() => {
-    document.documentElement.style.setProperty("--margin-color", color);
+    document.documentElement.style.setProperty("--margin-color", gradientColor);
     document.documentElement.style.setProperty("--margin-image", `${margin}px`);
     document.documentElement.style.setProperty(
       "--box-shadow",
       `0 20px 68px rgba(0, 0, 0, 0.55)`
     );
     setHasBoxShadow(true);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        colorPickerRef.current &&
+        !colorPickerRef.current.contains(event.target)
+      ) {
+        setShowColorPicker(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        settingsMenuRef.current &&
+        !settingsMenuRef.current.contains(event.target)
+      ) {
+        setSettingsDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   useEffect(() => {
@@ -383,6 +421,10 @@ export default function CodeImage({ code, fileName }) {
     setSelectedTheme(themes[themeName]);
   };
 
+  const toggleColorPicker = () => {
+    setShowColorPicker(!showColorPicker);
+  };
+
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
@@ -406,6 +448,7 @@ export default function CodeImage({ code, fileName }) {
     const newBoxShadow = boxShadow ? "0 20px 68px rgba(0, 0, 0, 0.55)" : "";
     document.documentElement.style.setProperty("--box-shadow", newBoxShadow);
   };
+
   const handleWatermarkToggle = () => {
     setWatermark(!watermark);
   };
@@ -421,6 +464,11 @@ export default function CodeImage({ code, fileName }) {
       "--font-size",
       `${newFontSize}px`
     );
+  };
+
+  const onGradientColorChange = (value) => {
+    setGradientColor(value);
+    document.documentElement.style.setProperty("--margin-color", `${value}`);
   };
 
   const downloadImage = async () => {
@@ -461,13 +509,6 @@ export default function CodeImage({ code, fileName }) {
     setIsProcessing(false);
   };
 
-  const onColorChange = (event) => {
-    setColor(event.target.value);
-    document.documentElement.style.setProperty(
-      "--margin-color",
-      `${event.target.value}`
-    );
-  };
   return (
     <div className="code-image-div">
       <div className="code-image-config-options">
@@ -517,10 +558,30 @@ export default function CodeImage({ code, fileName }) {
             />
           </div>
           <div className="color-picker">
-            <input type="color" value={color} onChange={onColorChange} />
+            <div
+              ref={colorPickerRef}
+              style={{
+                width: "50px",
+                height: "50px",
+                background: gradientColor,
+                cursor: "pointer",
+                borderRadius: "2px",
+              }}
+              onClick={toggleColorPicker}
+            />
+            {showColorPicker && (
+              <div className="color-picker-menu" ref={colorPickerRef}>
+                <ReactGPicker
+                  gradient={true}
+                  value={gradientColor}
+                  onChange={onGradientColorChange}
+                />
+              </div>
+            )}
           </div>
           <div className="settings-dropdown-menu">
             <div
+              ref={settingsMenuRef}
               className="settings-dropdown-toggle"
               onClick={handleSettingsDropdown}
             >
@@ -537,7 +598,10 @@ export default function CodeImage({ code, fileName }) {
               </svg>
             </div>
             {settingsDropdown && (
-              <div className="settings-dropdown-menu-content">
+              <div
+                className="settings-dropdown-menu-content"
+                ref={settingsMenuRef}
+              >
                 <label>
                   <input
                     type="checkbox"

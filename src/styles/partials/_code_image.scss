@@ -191,12 +191,49 @@
 
   .color-picker {
     padding: 10px;
+    position: relative !important;
+    left: unset !important;
+    top: unset !important;
     border-radius: 6px;
     border: 1px solid #c6cace1a;
     box-shadow: 0px 1px 2px 0px #1f1e241f;
     display: flex;
     align-items: center;
     width: min-content;
+    .color-picker-menu {
+      position: absolute;
+      top: 5rem;
+      right: 0;
+      z-index: 9999999999;
+      @media screen and (max-width: 1180px) {
+        left: 10%;
+      }
+      @media screen and (max-width: 1080px) {
+        > .popup_tabs {
+          right: 12rem !important;
+        }
+      }
+      @media screen and (max-width: 653px) {
+        > .popup_tabs {
+          right: 0 !important;
+        }
+      }
+      @media screen and (max-width: 551px) {
+        > .popup_tabs {
+          left: -13rem !important;
+        }
+      }
+      @media screen and (max-width: 455px) {
+        > .popup_tabs {
+          left: -13rem;
+        }
+      }
+      @media screen and (max-width: 363px) {
+        > .popup_tabs {
+          left: 0;
+        }
+      }
+    }
   }
 
   .settings-dropdown-menu {
@@ -217,7 +254,7 @@
 
     .settings-dropdown-menu-content {
       position: absolute;
-      background-color: var(--second-background-color);
+      background: var(--second-background-color);
       top: 5rem;
       z-index: 99999999;
       right: 0%;
@@ -236,9 +273,14 @@
       @media screen and (max-width: 723px) {
         left: 10%;
       }
-
+      @media screen and (max-width: 552px) {
+        left: -8rem;
+      }
       @media screen and (max-width: 530px) {
         left: -8rem;
+      }
+      @media screen and (max-width: 455px) {
+        left: 0rem;
       }
       @media screen and (max-width: 432px) {
         left: 0;
@@ -277,7 +319,7 @@
 
   .code-image-background {
     border-radius: 14px;
-    background-color: var(--margin-color) !important;
+    background: var(--margin-color) !important;
   }
 }
 

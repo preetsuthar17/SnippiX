@@ -46,26 +46,13 @@
       }
     }
     .interaction-buttons {
-      .red {
+      .gray_circle {
         width: 12px;
         border-radius: 50%;
         height: 12px;
         border-radius: 50%;
-        background-color: #ff5f56;
-      }
-      .yellow {
-        width: 12px;
-        border-radius: 50%;
-        height: 12px;
-        border-radius: 50%;
-        background-color: #ffbd2e;
-      }
-      .green {
-        width: 12px;
-        border-radius: 50%;
-        height: 12px;
-        border-radius: 50%;
-        background-color: #27c93f;
+        background-color: #ffffff15;
+        border: 2px solid rgba(255, 255, 255, 0.057);
       }
       position: absolute;
       z-index: 9999999 !important;

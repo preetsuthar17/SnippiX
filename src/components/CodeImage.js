@@ -579,9 +579,9 @@ export default function CodeImage({ code, fileName }) {
                 {fileName}
               </SyntaxHighlighter>
               <div className="interaction-buttons">
-                <div className="red"></div>
-                <div className="yellow"></div>
-                <div className="green"></div>
+                <div className="gray_circle"></div>
+                <div className="gray_circle"></div>
+                <div className="gray_circle"></div>
               </div>
             </div>
           ) : (
@@ -594,9 +594,9 @@ export default function CodeImage({ code, fileName }) {
                 &nbsp;
               </SyntaxHighlighter>
               <div className="interaction-buttons">
-                <div className="red"></div>
-                <div className="yellow"></div>
-                <div className="green"></div>
+                <div className="gray_circle"></div>
+                <div className="gray_circle"></div>
+                <div className="gray_circle"></div>
               </div>
             </div>
           )}

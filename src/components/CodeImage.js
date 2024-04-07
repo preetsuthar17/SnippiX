@@ -6,14 +6,13 @@ import { toPng } from "html-to-image";
 import * as clipboard from "clipboard-polyfill";
 
 export default function CodeImage({ code, fileName }) {
-  const [fontSize, setFontSize] = useState(16);
   const [margin, setMargin] = useState(20);
   const [boxShadow, setBoxShadow] = useState("");
   const [hasBoxShadow, setHasBoxShadow] = useState(true);
   const [watermark, setWatermark] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [gradientColor, setGradientColor] = useState(
-    "linear-gradient(90deg, rgb(120, 115, 245) 0.00%,rgb(236, 119, 171) 100.00%)"
+    "linear-gradient(to bottom right, #a78ffb ,#e5bcf6)"
   );
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [settingsDropdown, setSettingsDropdown] = useState(false);

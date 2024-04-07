@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CodeEditor({ onCodeSubmit }) {
   const [code, setCode] = useState(
@@ -6,9 +6,9 @@ export default function CodeEditor({ onCodeSubmit }) {
   );
   const [fileName, setFileName] = useState("index.js");
 
-  const handleCodeSubmit = () => {
+  useEffect(() => {
     onCodeSubmit(code, fileName);
-  };
+  }, [code, fileName, onCodeSubmit]);
 
   return (
     <div className="code-editor-div">
@@ -25,9 +25,6 @@ export default function CodeEditor({ onCodeSubmit }) {
         onChange={(e) => setCode(e.target.value)}
         placeholder="Type your code here..."
       />
-      <button className="primary-button" onClick={handleCodeSubmit}>
-        Snippixify code
-      </button>
     </div>
   );
 }

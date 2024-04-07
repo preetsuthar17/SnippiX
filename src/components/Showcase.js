@@ -11,23 +11,16 @@ export const Showcase = () => {
   return (
     <>
       <main className="showcase">
-        <div className="showcase-headings">
-          <h1>Snippix</h1>
-          <p>
-            Easily convert your code snippets in beautiful images and share
-            seamlessly.
-          </p>
-        </div>
+        <section className="showcase-code-input-section">
+          <CodeEditor
+            onCodeSubmit={(inputCode, inputFileName) => {
+              setCode(inputCode);
+              setFileName(inputFileName);
+            }}
+          />{" "}
+          {code && <CodeImage code={code} fileName={fileName} />}{" "}
+        </section>
       </main>
-      <section className="showcase-code-input-section">
-        <CodeEditor
-          onCodeSubmit={(inputCode, inputFileName) => {
-            setCode(inputCode);
-            setFileName(inputFileName);
-          }}
-        />{" "}
-        {code && <CodeImage code={code} fileName={fileName} />}{" "}
-      </section>
     </>
   );
 };

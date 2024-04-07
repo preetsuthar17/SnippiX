@@ -342,11 +342,6 @@ export default function CodeImage({ code, fileName }) {
     autoDetectLanguage();
   }, [code]);
 
-  const handleThemeChange = (event) => {
-    const themeName = event.target.value;
-    setSelectedTheme(themes[themeName]);
-  };
-
   const toggleColorPicker = () => {
     setShowColorPicker(!showColorPicker);
   };
@@ -359,8 +354,7 @@ export default function CodeImage({ code, fileName }) {
     setSettingsDropdown(!settingsDropdown);
   };
 
-  const handleMarginChange = (event) => {
-    const newMargin = parseInt(event.target.value);
+  const handleMarginChange = (newMargin) => {
     setMargin(newMargin);
     document.documentElement.style.setProperty(
       "--margin-image",
@@ -381,15 +375,6 @@ export default function CodeImage({ code, fileName }) {
 
   const handleLineCountToggle = () => {
     setLineCount(!lineCount);
-  };
-
-  const handleFontSizeChange = (event) => {
-    const newFontSize = parseInt(event.target.value);
-    setFontSize(newFontSize);
-    document.documentElement.style.setProperty(
-      "--font-size",
-      `${newFontSize}px`
-    );
   };
 
   const onGradientColorChange = (value) => {
@@ -475,7 +460,6 @@ export default function CodeImage({ code, fileName }) {
 
   return (
     <div className="code-image-div">
-
       <div className="code-image-background" ref={ref}>
         <div className="code-image-main-div">
           {fileName ? (
@@ -535,31 +519,23 @@ export default function CodeImage({ code, fileName }) {
               </option>
             ))}
           </select>
+
           <div className="PB-range-slider-div">
             {" "}
-            <small>Font Size</small>{" "}
-            <input
-              type="range"
-              id="myRange"
-              min="13"
-              max="40"
-              value={fontSize}
-              onChange={handleFontSizeChange}
-              className="font-size-slider PB-range-slider"
-            />
-          </div>
-          <div className="PB-range-slider-div">
-            {" "}
-            <small>Margin</small>{" "}
-            <input
-              type="range"
-              id="myRange"
-              min="0"
-              max="100"
-              value={margin}
-              onChange={handleMarginChange}
-              className="font-size-slider PB-range-slider"
-            />
+            <small>Padding</small>{" "}
+            <div className="margin-selector">
+              {["10", "16", "32", "64", "128"].map((value, index) => (
+                <div
+                  key={index}
+                  className={`margin-option ${
+                    margin === value ? "selected" : ""
+                  }`}
+                  onClick={() => handleMarginChange(value)}
+                >
+                  {value}px
+                </div>
+              ))}
+            </div>
           </div>
           <div className="color-picker">
             <div

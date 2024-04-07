@@ -13,10 +13,10 @@
         align-items: center;
         list-style: none;
         flex-direction: row;
-        // gap: 15px;
+        gap: 15px;
         flex-wrap: wrap;
+        justify-content: center;
         li {
-          padding: 0;
           a {
             font-size: 13px;
             opacity: 75%;
@@ -24,14 +24,12 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            padding: 0;
             &:hover {
               span {
                 transform: scale(1.1);
               }
             }
             span {
-              align-items: center;
               transition: all ease 0.2s;
               display: flex;
             }

@@ -524,7 +524,7 @@ export default function CodeImage({ code, fileName }) {
             {" "}
             <small>Padding</small>{" "}
             <div className="margin-selector">
-              {["10", "16", "32", "64", "128"].map((value, index) => (
+              {["10", "16", "32", "64"].map((value, index) => (
                 <div
                   key={index}
                   className={`margin-option ${

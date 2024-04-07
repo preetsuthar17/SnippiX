@@ -10,7 +10,9 @@
     top: -7rem;
     z-index: -1;
     border-radius: 50%;
-    width: 40rem;
+    max-width: 40rem;
+    width: 100%;
+
     height: 10rem;
     background: #cc2b5e; /* fallback for old browsers */
     background: -webkit-linear-gradient(

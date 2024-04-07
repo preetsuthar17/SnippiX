@@ -1,45 +1,63 @@
 import Link from "next/link";
-import snippixBanner from "../../public/snippix-banner.svg";
-import Image from "next/image";
-
 export const Footer = () => {
   return (
     <>
       <footer className="footer">
-        <div className="footer-header">
-          <Image
-            src={snippixBanner}
-            width={100}
-            height={100}
-            alt="snippix"
-            loading="lazy"
-          />
-        </div>
         <div className="footer-links">
           <div className="section-1">
-            <p>EXPLORE</p>
             <ul>
               <li>
-                <Link href="https://preetsuthar.me" target="_blank">
-                  Developer
+                <Link href="https://github.com/preetsuthar17" target="_blank">
+                  Github{" "}
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"
+                      />
+                    </svg>
+                  </span>
                 </Link>
               </li>
               <li>
-                <Link href="https://github.com/preetsuthar17" target="_blank">
-                  Github
+                <Link href="https://preetsuthar.me" target="_blank">
+                  Made by Preet Suthar{" "}
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"
+                      />
+                    </svg>
+                  </span>
                 </Link>
               </li>
               <li>
                 <Link href="https://x.com/preetsuthar17" target="_blank">
-                  Twitter (x)
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://github.com/preetsuthar17/SnippiX"
-                  target="_blank"
-                >
-                  Source Code
+                  Twitter (x){" "}
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"
+                      />
+                    </svg>
+                  </span>
                 </Link>
               </li>
             </ul>

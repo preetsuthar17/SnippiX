@@ -2,30 +2,35 @@
   display: flex;
   justify-content: space-around;
   padding: 2rem 0;
-  .footer-header {
-    img {
-      width: 8rem;
-      height: auto;
-    }
-  }
+  align-items: center;
   .footer-links {
     .section-1 {
+      align-items: center;
       display: flex;
-      flex-direction: column;
-      p {
-        font-weight: bold;
-        margin-bottom: 0.8rem;
-        font-size: 17px;
-      }
+      flex-direction: row;
       ul {
         display: flex;
+        align-items: center;
         list-style: none;
-        flex-direction: column;
-        gap: 3px;
+        flex-direction: row;
+        gap: 4rem;
         li {
           a {
             font-size: 13px;
-            opacity: 85%;
+            opacity: 75%;
+            transition: 0.2s ease all;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            &:hover {
+              span {
+                transform: scale(1.1);
+              }
+            }
+            span {
+              transition: all ease 0.2s;
+              display: flex;
+            }
             &:hover {
               opacity: 100%;
             }

@@ -475,6 +475,53 @@ export default function CodeImage({ code, fileName }) {
 
   return (
     <div className="code-image-div">
+
+      <div className="code-image-background" ref={ref}>
+        <div className="code-image-main-div">
+          {fileName ? (
+            <div className="file-name-div">
+              <SyntaxHighlighter
+                className="file-name"
+                language="plaintext"
+                style={oneDark}
+              >
+                {fileName}
+              </SyntaxHighlighter>
+              <div className="interaction-buttons">
+                <div className="gray_circle"></div>
+                <div className="gray_circle"></div>
+                <div className="gray_circle"></div>
+              </div>
+            </div>
+          ) : (
+            <div className="file-name-div">
+              <SyntaxHighlighter
+                className="file-name"
+                language="plaintext"
+                style={oneDark}
+              >
+                &nbsp;
+              </SyntaxHighlighter>
+              <div className="interaction-buttons">
+                <div className="gray_circle"></div>
+                <div className="gray_circle"></div>
+                <div className="gray_circle"></div>
+              </div>
+            </div>
+          )}
+          <SyntaxHighlighter
+            className="code-block"
+            language={selectedLanguage}
+            style={oneDark}
+            showLineNumbers={lineCount}
+          >
+            {code}
+          </SyntaxHighlighter>
+          <div className="watermark-content">
+            {watermark && <p>snippix.netlify.app</p>}
+          </div>
+        </div>
+      </div>
       <div className="code-image-config-options">
         <div className="theme-select-div ">
           <select
@@ -629,52 +676,6 @@ export default function CodeImage({ code, fileName }) {
                 </svg>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="code-image-background" ref={ref}>
-        <div className="code-image-main-div">
-          {fileName ? (
-            <div className="file-name-div">
-              <SyntaxHighlighter
-                className="file-name"
-                language="plaintext"
-                style={oneDark}
-              >
-                {fileName}
-              </SyntaxHighlighter>
-              <div className="interaction-buttons">
-                <div className="gray_circle"></div>
-                <div className="gray_circle"></div>
-                <div className="gray_circle"></div>
-              </div>
-            </div>
-          ) : (
-            <div className="file-name-div">
-              <SyntaxHighlighter
-                className="file-name"
-                language="plaintext"
-                style={oneDark}
-              >
-                &nbsp;
-              </SyntaxHighlighter>
-              <div className="interaction-buttons">
-                <div className="gray_circle"></div>
-                <div className="gray_circle"></div>
-                <div className="gray_circle"></div>
-              </div>
-            </div>
-          )}
-          <SyntaxHighlighter
-            className="code-block"
-            language={selectedLanguage}
-            style={oneDark}
-            showLineNumbers={lineCount}
-          >
-            {code}
-          </SyntaxHighlighter>
-          <div className="watermark-content">
-            {watermark && <p>snippix.netlify.app</p>}
           </div>
         </div>
       </div>

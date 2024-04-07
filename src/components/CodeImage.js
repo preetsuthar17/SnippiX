@@ -1,50 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import ReactGPicker from "react-gcolor-picker";
-import {
-  a11yDark,
-  atomDark,
-  base16AteliersulphurpoolLight,
-  cb,
-  coldarkCold,
-  coldarkDark,
-  coy,
-  dracula,
-  dark,
-  duotoneDark,
-  duotoneEarth,
-  duotoneForest,
-  duotoneLight,
-  duotoneSea,
-  duotoneSpace,
-  funky,
-  ghcolors,
-  hopscotch,
-  materialDark,
-  materialLight,
-  materialOceanic,
-  nightOwl,
-  nord,
-  okaidia,
-  oneDark,
-  oneLight,
-  pojoaque,
-  prism,
-  shadesOfPurple,
-  solarizedlight,
-  synthwave84,
-  tomorrow,
-  twilight,
-  vs,
-  vsDark,
-  vscDarkPlus,
-  xonokai,
-} from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { toPng } from "html-to-image";
 import * as clipboard from "clipboard-polyfill";
 
 export default function CodeImage({ code, fileName }) {
-  const [selectedTheme, setSelectedTheme] = useState(vscDarkPlus);
   const [fontSize, setFontSize] = useState(16);
   const [margin, setMargin] = useState(20);
   const [boxShadow, setBoxShadow] = useState("");
@@ -64,43 +25,7 @@ export default function CodeImage({ code, fileName }) {
   const settingsMenuRef = useRef();
 
   const themes = {
-    vscDarkPlus,
-    a11yDark,
-    atomDark,
-    base16AteliersulphurpoolLight,
-    cb,
-    coldarkCold,
-    coldarkDark,
-    coy,
-    dracula,
-    dark,
-    duotoneDark,
-    duotoneEarth,
-    duotoneForest,
-    duotoneLight,
-    duotoneSea,
-    duotoneSpace,
-    funky,
-    ghcolors,
-    hopscotch,
-    materialDark,
-    materialLight,
-    materialOceanic,
-    nightOwl,
-    nord,
-    okaidia,
     oneDark,
-    oneLight,
-    pojoaque,
-    prism,
-    shadesOfPurple,
-    solarizedlight,
-    synthwave84,
-    tomorrow,
-    twilight,
-    vs,
-    vsDark,
-    xonokai,
   };
 
   const supportedLanguages = [
@@ -552,13 +477,6 @@ export default function CodeImage({ code, fileName }) {
     <div className="code-image-div">
       <div className="code-image-config-options">
         <div className="theme-select-div ">
-          <select onChange={handleThemeChange} className="theme-selector">
-            {Object.keys(themes).map((theme, index) => (
-              <option key={index} value={theme}>
-                {theme}
-              </option>
-            ))}
-          </select>
           <select
             value={selectedLanguage}
             onChange={handleLanguageChange}
@@ -626,8 +544,8 @@ export default function CodeImage({ code, fileName }) {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
+                width="29"
+                height="29"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -668,6 +586,50 @@ export default function CodeImage({ code, fileName }) {
               </div>
             )}
           </div>
+          <div className="settings-dropdown-menu">
+            <div className="settings-dropdown-toggle" onClick={downloadImage}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="29"
+                  height="29"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-8 4v-5h2v3h12v-3h2v5z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div className="settings-dropdown-menu">
+            <div className="settings-dropdown-toggle" onClick={copyImage}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="29"
+                  height="29"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M9 18q-.825 0-1.412-.587T7 16V4q0-.825.588-1.412T9 2h9q.825 0 1.413.588T20 4v12q0 .825-.587 1.413T18 18zm0-2h9V4H9zm-4 6q-.825 0-1.412-.587T3 20V6h2v14h11v2zm4-6V4z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="code-image-background" ref={ref}>
@@ -677,7 +639,7 @@ export default function CodeImage({ code, fileName }) {
               <SyntaxHighlighter
                 className="file-name"
                 language="plaintext"
-                style={selectedTheme}
+                style={oneDark}
               >
                 {fileName}
               </SyntaxHighlighter>
@@ -692,7 +654,7 @@ export default function CodeImage({ code, fileName }) {
               <SyntaxHighlighter
                 className="file-name"
                 language="plaintext"
-                style={selectedTheme}
+                style={oneDark}
               >
                 &nbsp;
               </SyntaxHighlighter>
@@ -706,7 +668,7 @@ export default function CodeImage({ code, fileName }) {
           <SyntaxHighlighter
             className="code-block"
             language={selectedLanguage}
-            style={selectedTheme}
+            style={oneDark}
             showLineNumbers={lineCount}
           >
             {code}
@@ -715,44 +677,6 @@ export default function CodeImage({ code, fileName }) {
             {watermark && <p>snippix.netlify.app</p>}
           </div>
         </div>
-      </div>
-      <div className="code-image-buttons">
-        <button
-          disabled={isProcessing}
-          onClick={downloadImage}
-          className="primary-button"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              d="M12 15.575q-.2 0-.375-.062T11.3 15.3l-3.6-3.6q-.3-.3-.288-.7t.288-.7q.3-.3.713-.312t.712.287L11 12.15V5q0-.425.288-.712T12 4q.425 0 .713.288T13 5v7.15l1.875-1.875q.3-.3.713-.288t.712.313q.275.3.288.7t-.288.7l-3.6 3.6q-.15.15-.325.213t-.375.062M6 20q-.825 0-1.412-.587T4 18v-2q0-.425.288-.712T5 15q.425 0 .713.288T6 16v2h12v-2q0-.425.288-.712T19 15q.425 0 .713.288T20 16v2q0 .825-.587 1.413T18 20z"
-            />
-          </svg>
-          {isProcessing ? "Downloading..." : "Download Image"}
-        </button>
-        <button
-          disabled={isProcessing}
-          onClick={copyImage}
-          className="primary-button"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              d="M9 18q-.825 0-1.412-.587T7 16V4q0-.825.588-1.412T9 2h9q.825 0 1.413.588T20 4v12q0 .825-.587 1.413T18 18zm0-2h9V4H9zm-4 6q-.825 0-1.412-.587T3 20V6h2v14h11v2zm4-6V4z"
-            />
-          </svg>
-          {isCopied ? "Copied!" : "Copy Image"}
-        </button>
       </div>
     </div>
   );

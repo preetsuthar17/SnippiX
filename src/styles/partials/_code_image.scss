@@ -28,15 +28,12 @@
   .file-name-div {
     position: relative;
 
+    margin-bottom: 0px !important;
     .file-name {
       padding: 10px !important;
       border-radius: 10px 10px 0 0 !important;
-      border-top: 2px solid rgba(255, 255, 255, 0.08) !important;
-      border-left: 2px solid rgba(255, 255, 255, 0.08) !important;
-      border-right: 2px solid rgba(255, 255, 255, 0.08) !important;
-      border-bottom: none !important;
       display: flex !important;
-
+      border-bottom: none;
       > code {
         width: 100% !important;
         text-align: center !important;
@@ -72,8 +69,11 @@
   }
   pre {
     border-radius: 0px 0px 10px 10px !important;
+    background-color: rgba(0, 0, 0, 0.775) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.198);
     margin: 0 !important;
-    border: 2px solid rgba(255, 255, 255, 0.08) !important;
+    border-top: none;
     &::-webkit-scrollbar {
       height: 0.4em;
     }
@@ -90,6 +90,7 @@
   }
 
   code {
+    background-color: transparent !important;
     font-family: var(--code-font-family) !important;
   }
 

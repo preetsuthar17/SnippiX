@@ -3,6 +3,29 @@
   justify-content: center;
   margin: 2rem 0;
   text-align: center;
+  position: relative;
+  &::before {
+    position: absolute;
+    content: "";
+    top: -7rem;
+    z-index: -1;
+    border-radius: 50%;
+    width: 40rem;
+    height: 10rem;
+    background: #cc2b5e; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to bottom right,
+      blue,
+      red
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to bottom right,
+      blue,
+      red
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    opacity: 50%;
+    filter: blur(100px);
+  }
   h1 {
     font-size: 5rem;
     letter-spacing: -3px;

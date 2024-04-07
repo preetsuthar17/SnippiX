@@ -18,7 +18,7 @@ export const Showcase = () => {
               setFileName(inputFileName);
             }}
           />{" "}
-          {code && <CodeImage code={code} fileName={fileName} />}{" "}
+          <CodeImage code={code} fileName={fileName} />
         </section>
       </main>
     </>

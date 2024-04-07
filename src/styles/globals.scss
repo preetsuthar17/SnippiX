@@ -68,3 +68,14 @@ button {
 textarea {
   font-family: inherit;
 }
+
+.showcase-code-input-section {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 2rem;
+  align-items: flex-start;
+  @media screen and (max-width: 1214px) {
+    gap: 0;
+    flex-wrap: wrap;
+  }
+}
